@@ -13,8 +13,7 @@ export default function Footer() {
           <a href="mailto:yactayocervando@gmail.com" className="text-secondary mx-2">
             <Mail />
           </a>
-          {/* Añade tu link de GitHub */}
-          <a href="#" target="_blank" rel="noopener noreferrer" className="text-secondary mx-2">
+          <a href="https://github.com/CervandoYR" target="_blank" rel="noopener noreferrer" className="text-secondary mx-2">
             <Github />
           </a>
         </div>

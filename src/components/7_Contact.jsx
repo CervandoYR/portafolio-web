@@ -1,9 +1,43 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { Send, Mail, Linkedin } from 'lucide-react';
 
-export default function Contact() {
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-zykfi6EIdCrK5b5WffujVWLEZT08rJwIqvOH0c8jot1rFBTd6Mx6jtIXrgrLF033zg/exec";
+
+// Recibimos las props 'onSuccess' y 'onError' desde App.jsx
+export default function Contact({ onSuccess, onError }) {
+  const [loading, setLoading] = useState(false);
+  //Eliminamos los estados 'submitted' y 'error' de aquí
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    onError(null); // Limpiamos errores anteriores
+    
+    const formData = new FormData(e.target);
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.result === 'success') {
+        onSuccess(); // 4. Llamamos a la función onSuccess (de App.jsx)
+        e.target.reset();
+      } else {
+        onError(data.error || 'Ocurrió un error desconocido.'); // 5. Llamamos a onError
+      }
+      setLoading(false);
+    })
+    .catch(err => {
+      onError('Error de conexión. Inténtalo de nuevo.'); // 6. Llamamos a onError
+      setLoading(false);
+    });
+  };
+
   return (
     <section id="contacto" className="section-container">
       <Container>
@@ -18,11 +52,9 @@ export default function Contact() {
         <p className="text-center text-secondary fs-5 mx-auto mb-5" style={{ maxWidth: '600px' }}>
           ¡Conectemos! Estoy abierto a oportunidades laborales y nuevos proyectos.
         </p>
-        {/* 1. Añadimos una Fila (Row) para centrar el contenido */}
+
         <Row className="justify-content-center">
-          {/* 2. Añadimos una Columna contenedora (Col) con un ancho máximo (ej. lg={10}) */}
           <Col lg={10} xl={9}>
-            {/* 3. Esta es tu Fila original, ahora está dentro de la columna centrada */}
             <Row className="g-4 align-items-center">
               <Col md={6}>
                 <motion.div
@@ -41,26 +73,41 @@ export default function Contact() {
                 <motion.form
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  onSubmit={handleSubmit}
                 >
                   <Form.Group className="mb-3">
-                    <Form.Control type="text" placeholder="Tu Nombre" />
+                    <Form.Control type="text" placeholder="Tu Nombre" name="name" required />
                   </Form.Group>
                   <Form.Group className="mb-3">
-                    <Form.Control type="email" placeholder="Tu Email" />
+                    <Form.Control type="email" placeholder="Tu Email" name="email" required />
                   </Form.Group>
                   <Form.Group className="mb-3">
-                    <Form.Control as="textarea" rows={5} placeholder="Tu Mensaje" />
+                    <Form.Control 
+                      as="textarea" 
+                      rows={5} 
+                      placeholder="Tu Mensaje" 
+                      name="message" 
+                      required 
+                      style={{ resize: 'none' }}
+                    />
                   </Form.Group>
-                  <Button type="submit" className="btn-primary-custom w-100">
-                    Enviar Mensaje <Send className="w-5 h-5" />
+                  
+
+                  <Button type="submit" className="btn-primary-custom w-100" disabled={loading}>
+                    {loading ? 'Enviando...' : (
+                      <>
+                        Enviar Mensaje <Send className="w-5 h-5" />
+                      </>
+                    )}
                   </Button>
                 </motion.form>
               </Col>
             </Row>
           </Col>
         </Row>
-        
       </Container>
+      
+
     </section>
   );
 }

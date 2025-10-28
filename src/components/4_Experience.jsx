@@ -3,7 +3,7 @@ import { Container, Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
 export default function Experience() {
-  // Estos estilos son muy específicos de la línea de tiempo, los ponemos aquí
+  // Estos estilos son muy específicos de la línea de tiempo
   const timelineStyles = `
     .timeline-container { position: relative; max-width: 900px; margin: 0 auto; }
     .timeline-container::after { content: ''; position: absolute; width: 2px; background-color: var(--dark-border); top: 0; bottom: 0; left: 50%; margin-left: -1px; }
@@ -75,7 +75,7 @@ export default function Experience() {
                 <Card.Body>
                   <Card.Title>Soporte Técnico (Proyecto Asignado)</Card.Title>
                   
-                  {/* --- CAMBIO AQUÍ --- */}
+    
                   <Card.Subtitle className="mb-2 text-secondary">PROYECTO ASIGNADO EN MARKHAM | (Ene 2025 - Mar 2025)</Card.Subtitle>
                   
                   <ul>

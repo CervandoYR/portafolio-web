@@ -11,7 +11,7 @@ export default function AppNavbar() {
       .toLowerCase()
       // Esto elimina tildes y acentos (ej. "mí" -> "mi")
       .normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
-      // Esto reemplaza espacios (ej. "sobre mi" -> "sobre-mi")
+      // Esto reemplaza espacios ("sobre mi" -> "sobre-mi")
       .replace(/ /g, '-');
   };
 

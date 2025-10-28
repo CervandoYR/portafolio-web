@@ -60,12 +60,10 @@ export default function Projects() {
                     <Card.Title>{project.title}</Card.Title>
                     <Card.Text>{project.description}</Card.Text>
                     
-                    {/* --- CAMBIO AQUÍ --- */}
                     <div className="mt-3">
                       {project.tags.map(tag => (
                         <Badge 
                           key={tag} 
-                          // Añadimos 'me-1' (margin-end) y 'mb-1' (margin-bottom)
                           className={`${tagColors[tag] || 'badge-blue'} me-1 mb-1`}
                         >
                           {tag}
