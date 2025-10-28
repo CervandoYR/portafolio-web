@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Satoshi', sans-serif;
+}
+
+body {
+  background: #0a0a0f;
+  color: #e0e7ff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Scrollbar futurista */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #00D1FF; }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(17, 17, 24, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #1a1a2e;
+}
+
+/* Glow */
+.glow {
+  box-shadow: 0 0 20px rgba(0, 209, 255, 0.3);
+}
+.glow-hover:hover {
+  box-shadow: 0 0 40px rgba(0, 209, 255, 0.6);
+}
+
+/* Gradientes */
+.gradient-text {
+  background: linear-gradient(to right, #00D1FF, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gradient-btn {
+  background: linear-gradient(to right, #00D1FF, #7c3aed);
+}
+
+/* Animaciones */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.float { animation: float 6s ease-in-out infinite; }
+.pulse { animation: pulse 2s ease-in-out infinite; }
+
+/* Botones */
+.btn {
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.btn-primary {
+  background: linear-gradient(to right, #00D1FF, #7c3aed);
+  color: #0a0a0f;
+  box-shadow: 0 4px 20px rgba(0, 209, 255, 0.4);
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 209, 255, 0.6);
+}
+.btn-outline {
+  border: 1px solid #00D1FF;
+  color: #00D1FF;
+  background: transparent;
+}
+.btn-outline:hover {
+  background: rgba(0, 209, 255, 0.1);
+  transform: scale(1.05);
+}
+
+/* Tarjetas */
+.card {
+  background: #111118;
+  border: 1px solid #1a1a2e;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 209, 255, 0.2);
+  border-color: #00D1FF;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: 4px;
+}
+.badge-blue { background: rgba(0, 209, 255, 0.2); color: #00D1FF; }
+.badge-green { background: rgba(35, 134, 54, 0.2); color: #4ade80; }
+
+/* Responsive */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.text-center { text-align: center; }

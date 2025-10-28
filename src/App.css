@@ -1,0 +1,196 @@
+/* src/App.css */
+/* Importa la fuente */
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700;900&display=swap');
+
+/* 1. Variables de la Paleta "AI Startup" */
+:root {
+  --dark-bg: #0a0a0f;
+  --dark-card: #111118;
+  --dark-border: #1a1a2e;
+  --text-light: #e0e7ff;
+  --text-secondary: #94a3b8;
+  --neon-blue: #00D1FF;
+  --soft-purple: #7c3aed;
+}
+
+/* 2. Estilos Base */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  font-family: 'Satoshi', sans-serif;
+  overflow-x: hidden;
+}
+
+/* 3. Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--dark-bg); }
+::-webkit-scrollbar-thumb { background: var(--dark-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
+
+/* 4. Glassmorphism (para el Navbar) */
+.glass {
+  background: rgba(17, 17, 24, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+/* 5. Texto en Gradiente */
+.gradient-text {
+  background: linear-gradient(to right, var(--neon-blue), var(--soft-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 6. Animaciones */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* 7. SOBRESCRITURA de Componentes Bootstrap */
+
+/* --- Navbar --- */
+.navbar {
+  /* Forzamos el padding a 0 para que el container se alinee */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--text-light);
+  transition: color 0.3s ease;
+  position: relative;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--neon-blue);
+}
+/* Línea animada */
+.navbar-dark .navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: var(--neon-blue);
+  transition: width 0.3s ease-out;
+}
+.navbar-dark .navbar-nav .nav-link:hover::after {
+  width: 70%;
+}
+.navbar-toggler {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* --- Títulos de Sección --- */
+.section-container {
+  padding: 80px 0;
+}
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+}
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+/* --- Botones --- */
+/* Creamos clases personalizadas para no romper el 'btn' de Bootstrap */
+.btn-primary-custom, .btn-outline-custom {
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none; /* Para los links <a> */
+}
+.btn-primary-custom {
+  background: linear-gradient(to right, var(--neon-blue), var(--soft-purple));
+  color: var(--dark-bg);
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 209, 255, 0.4);
+}
+.btn-primary-custom:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(0, 209, 255, 0.6);
+  color: var(--dark-bg);
+}
+.btn-outline-custom {
+  border: 1px solid var(--neon-blue);
+  color: var(--neon-blue);
+  background: transparent;
+}
+.btn-outline-custom:hover {
+  background: rgba(0, 209, 255, 0.1);
+  transform: scale(1.03);
+  color: var(--neon-blue);
+}
+
+/* --- Tarjetas --- */
+.card-custom {
+  background: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 16px !important;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  height: 100%; /* Hacemos que todas las tarjetas tengan la misma altura */
+}
+.card-custom.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 209, 255, 0.2);
+  border-color: var(--neon-blue) !important;
+}
+.card-custom .card-title {
+  color: var(--text-light);
+  font-weight: 700;
+}
+.card-custom .card-text, .card-custom p, .card-custom li {
+  color: var(--text-secondary);
+}
+.card-custom .list-group-item {
+  background-color: transparent !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-secondary);
+}
+
+/* --- Badges --- */
+.badge-blue { background: rgba(0, 209, 255, 0.2); color: var(--neon-blue); padding: 6px 12px; }
+.badge-green { background: rgba(35, 134, 54, 0.2); color: #4ade80; padding: 6px 12px; }
+
+/* --- Formulario --- */
+.form-control {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--text-light) !important;
+  padding: 0.75rem 1rem !important;
+}
+.form-control:focus {
+  border-color: var(--neon-blue) !important;
+  box-shadow: 0 0 10px rgba(0, 209, 255, 0.3) !important;
+}
+.form-control::placeholder {
+  color: var(--text-secondary);
+}
