@@ -4,8 +4,21 @@ import { Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function AppNavbar() {
+
+  // Función para limpiar tildes y espacios
+  const generateHref = (label) => {
+    return '#' + label
+      .toLowerCase()
+      // Esto elimina tildes y acentos (ej. "mí" -> "mi")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+      // Esto reemplaza espacios (ej. "sobre mi" -> "sobre-mi")
+      .replace(/ /g, '-');
+  };
+
   const links = ['Inicio', 'Sobre Mí', 'Experiencia', 'Proyectos', 'Educación', 'Contacto']
-    .map(label => ({ label, href: `#${label.toLowerCase().replace(' ', '-')}` }));
+    // --- CAMBIO AQUÍ ---
+    // Ahora usamos la función generateHref
+    .map(label => ({ label, href: generateHref(label) }));
 
   return (
     <Navbar variant="dark" expand="md" sticky="top" className="glass">
